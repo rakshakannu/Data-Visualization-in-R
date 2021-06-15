@@ -1,2 +1,2 @@
 # Data-Visualization-in-R
-R codes used for data visualization
+R codes used in data visualization course.
