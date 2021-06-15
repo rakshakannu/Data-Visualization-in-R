@@ -1,0 +1,99 @@
+---
+title: "Dashboard#1"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE}
+#File->New File->R Markdown
+
+
+#To summarise the layout headers:
+
+#    Multiple page header or Level 1 header: === or #
+#    Row or Column header or Level 2 header: --- or ##
+#    Box header or Level 3 header: ###
+#install.packages("flexdashboard")
+#install.packages("ggmap")
+library(flexdashboard)
+library(ggplot2)
+library(readxl)
+library(tidyverse)
+library(plotly)
+library(ggmap)
+require(knitr)
+```
+
+
+Dash1 {data-icon="fa-globe"}
+==============================
+Column {data-width=250}
+-------------------------------------
+
+### Mtcars-scatter
+
+```{r}
+p = plot_ly(data=mtcars,
+            x=~wt,
+            y=~mpg,
+            type = "scatter",
+            mode = "markers"
+)%>%
+
+  layout(title="Scatter plot using R Plotly-Mtcars")
+p
+```
+
+
+MTCAR-HOVER {data-icon="fa-user-plus"}
+================================
+Column {data-width=150}
+----------------------------------------------
+
+### mtcars-Hover
+
+```{r}
+### Customizing mouse hover text ####
+p = plot_ly(data = mtcars,
+            x=~mpg,
+            y=~wt,
+            type = "scatter",
+            mode="markers",
+            hoverinfo = "text",
+            text = paste("Miles per gallon: ", mtcars$mpg,
+                         "<br>",
+                         "Weight: ", mtcars$wt)
+            
+) %>%
+
+  layout(title="Scatter plot using R Plotly-Mtcars")
+p
+
+
+
+
+```
+
+### mtcars-symbol
+
+```{r}
+p <- plot_ly(data=mtcars,
+             x=~wt,
+             y=~mpg,
+             type = "scatter",
+             mode = "markers",
+             symbol = ~as.factor(cyl),
+             symbols =  c('circle','x','o'),
+             marker = list(size = 5)) %>%
+
+  layout(title="Scatter plot using R Plotly",
+         xaxis=list(title="Weight", showgrid = F),
+         yaxis=list(title="MPG", showgrid = F))
+
+p
+
+
+```
+
